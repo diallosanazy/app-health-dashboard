@@ -1,0 +1,9 @@
+metric,value
+failed_logins_24h,130.0
+open_incidents,5.0
+closed_incidents,25.0
+mttr_hours,37.9
+vuln_critical,0.0
+vuln_high,15.0
+vuln_medium,28.0
+vuln_low,82.0

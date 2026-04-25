@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SecOps - Single Pane of Glass</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+  :root {
+    --bg: #0f172a; --panel: #1e293b; --ink: #e2e8f0; --muted: #94a3b8;
+    --crit: #ef4444; --high: #f97316; --med: #eab308; --low: #22c55e;
+    --accent: #38bdf8;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 14px/1.4 system-ui, sans-serif; }
+  header { padding: 18px 24px; border-bottom: 1px solid #334155; display: flex; justify-content: space-between; align-items: center; }
+  header h1 { font-size: 18px; margin: 0; }
+  header .ts { color: var(--muted); font-size: 12px; }
+  .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px; padding: 16px 24px; }
+  .card { background: var(--panel); border-radius: 10px; padding: 16px; box-shadow: 0 1px 0 rgba(255,255,255,0.04) inset; }
+  .card h2 { margin: 0 0 8px 0; font-size: 13px; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; font-weight: 600; }
+  .kpi { font-size: 36px; font-weight: 700; }
+  .kpi.small { font-size: 24px; }
+  .col-3 { grid-column: span 3; } .col-4 { grid-column: span 4; }
+  .col-6 { grid-column: span 6; } .col-12 { grid-column: span 12; }
+  table { width: 100%; border-collapse: collapse; }
+  th, td { padding: 6px 8px; border-bottom: 1px solid #334155; text-align: left; font-size: 13px; }
+  th { color: var(--muted); font-weight: 500; }
+  .feed li { list-style: none; padding: 8px 0; border-bottom: 1px solid #334155; font-size: 13px; }
+  .feed li.kind-incident { color: #fca5a5; }
+  .feed li .ts { color: var(--muted); font-size: 11px; }
+  canvas { max-width: 100%; }
+  @media (max-width: 900px) {
+    .col-3, .col-4, .col-6 { grid-column: span 12; }
+  }
+</style>
+</head>
+<body>
+  <header>
+    <h1>SecOps - Single Pane of Glass</h1>
+    <span class="ts" id="generated">loading...</span>
+  </header>
+  <div class="grid">
+    <div class="card col-3"><h2>Failed Logins (24h)</h2><div class="kpi" id="kpi-logins">-</div></div>
+    <div class="card col-3"><h2>Open Incidents</h2><div class="kpi" id="kpi-open-inc">-</div></div>
+    <div class="card col-3"><h2>Closed Incidents</h2><div class="kpi" id="kpi-closed-inc">-</div></div>
+    <div class="card col-3"><h2>MTTR (hours)</h2><div class="kpi" id="kpi-mttr">-</div></div>
+
+    <div class="card col-6"><h2>Open Vulnerabilities by Severity</h2><canvas id="chart-vulns"></canvas></div>
+    <div class="card col-6"><h2>Top Source IPs (failed logins, 24h)</h2><canvas id="chart-ips"></canvas></div>
+
+    <div class="card col-6"><h2>Top Targeted Users (24h)</h2><canvas id="chart-users"></canvas></div>
+    <div class="card col-6"><h2>Recent Events</h2><ul class="feed" id="feed"></ul></div>
+  </div>
+
+<script>
+async function load() {
+  const r = await fetch("/api/metrics");
+  const m = await r.json();
+
+  document.getElementById("generated").textContent =
+    "Generated " + new Date(m.generated_at).toLocaleString();
+  document.getElementById("kpi-logins").textContent = m.failed_logins_24h;
+  document.getElementById("kpi-open-inc").textContent = m.open_incidents;
+  document.getElementById("kpi-closed-inc").textContent = m.closed_incidents;
+  document.getElementById("kpi-mttr").textContent = m.mttr_hours;
+
+  const sev = m.vuln_counts;
+  new Chart(document.getElementById("chart-vulns"), {
+    type: "bar",
+    data: {
+      labels: ["Critical", "High", "Medium", "Low"],
+      datasets: [{
+        data: [sev.Critical, sev.High, sev.Medium, sev.Low],
+        backgroundColor: ["#ef4444", "#f97316", "#eab308", "#22c55e"],
+      }],
+    },
+    options: { plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true } } },
+  });
+
+  function bar(id, obj, color) {
+    new Chart(document.getElementById(id), {
+      type: "bar",
+      data: { labels: Object.keys(obj), datasets: [{ data: Object.values(obj), backgroundColor: color }] },
+      options: { indexAxis: "y", plugins: { legend: { display: false } } },
+    });
+  }
+  bar("chart-ips", m.top_login_ips, "#38bdf8");
+  bar("chart-users", m.top_login_users, "#a78bfa");
+
+  const feed = document.getElementById("feed");
+  feed.innerHTML = "";
+  m.feed.forEach(e => {
+    const li = document.createElement("li");
+    li.className = "kind-" + e.kind;
+    li.innerHTML = `<span class="ts">${new Date(e.ts).toLocaleString()}</span> &mdash; ${e.text}`;
+    feed.appendChild(li);
+  });
+}
+load();
+setInterval(load, 60_000);  // auto-refresh every minute
+</script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+id,title,severity,opened_at,closed_at
+INC-0001,Phishing email reported,Medium,2026-04-14T07:57:01+00:00,2026-04-14T23:57:01+00:00
+INC-0002,Malware detected on endpoint,Medium,2026-04-06T20:57:01+00:00,2026-04-08T21:57:01+00:00
+INC-0003,Suspicious PowerShell execution,Medium,2026-03-27T16:57:01+00:00,
+INC-0004,Suspicious PowerShell execution,High,2026-04-23T09:57:01+00:00,2026-04-25T20:57:01+00:00
+INC-0005,Lateral movement attempt,Low,2026-03-31T15:57:01+00:00,2026-04-02T19:57:01+00:00
+INC-0006,Brute-force on VPN,High,2026-04-07T22:57:01+00:00,2026-04-09T16:57:01+00:00
+INC-0007,Suspicious PowerShell execution,Low,2026-03-29T20:57:01+00:00,2026-03-31T19:57:01+00:00
+INC-0008,Suspicious PowerShell execution,Medium,2026-04-20T16:57:01+00:00,2026-04-22T20:57:01+00:00
+INC-0009,Malware detected on endpoint,High,2026-04-11T23:57:01+00:00,
+INC-0010,Malware detected on endpoint,High,2026-04-18T00:57:01+00:00,2026-04-18T15:57:01+00:00
+INC-0011,Malware detected on endpoint,Low,2026-04-10T07:57:01+00:00,2026-04-11T02:57:01+00:00
+INC-0012,Suspicious PowerShell execution,High,2026-04-14T06:57:01+00:00,2026-04-15T02:57:01+00:00
+INC-0013,Service account misuse,High,2026-03-29T09:57:01+00:00,2026-03-31T19:57:01+00:00
+INC-0014,Suspicious PowerShell execution,Low,2026-03-29T10:57:01+00:00,2026-03-31T19:57:01+00:00
+INC-0015,Phishing email reported,Medium,2026-03-29T06:57:01+00:00,2026-03-30T18:57:01+00:00
+INC-0016,Phishing email reported,High,2026-04-22T01:57:01+00:00,2026-04-24T11:57:01+00:00
+INC-0017,Lateral movement attempt,Critical,2026-04-12T23:57:01+00:00,2026-04-13T11:57:01+00:00
+INC-0018,Phishing email reported,Medium,2026-04-01T13:57:01+00:00,
+INC-0019,Public-facing IIS exploit attempt,Medium,2026-03-31T19:57:01+00:00,2026-04-02T13:57:01+00:00
+INC-0020,Suspicious PowerShell execution,Medium,2026-04-22T13:57:01+00:00,2026-04-24T09:57:01+00:00
+INC-0021,Public-facing IIS exploit attempt,Medium,2026-04-17T20:57:01+00:00,2026-04-20T05:57:01+00:00
+INC-0022,Anomalous data egress,Medium,2026-03-30T04:57:01+00:00,2026-04-01T04:57:01+00:00
+INC-0023,Service account misuse,High,2026-04-10T18:57:01+00:00,2026-04-11T01:57:01+00:00
+INC-0024,Anomalous data egress,Critical,2026-04-21T04:57:01+00:00,2026-04-23T06:57:01+00:00
+INC-0025,Brute-force on VPN,High,2026-03-28T04:57:01+00:00,
+INC-0026,Anomalous data egress,High,2026-03-31T08:57:01+00:00,2026-04-02T05:57:01+00:00
+INC-0027,Suspicious PowerShell execution,Low,2026-03-26T09:57:01+00:00,2026-03-27T02:57:01+00:00
+INC-0028,Brute-force on VPN,High,2026-04-09T03:57:01+00:00,2026-04-10T22:57:01+00:00
+INC-0029,Suspicious PowerShell execution,Medium,2026-03-26T23:57:01+00:00,
+INC-0030,Service account misuse,Medium,2026-04-07T03:57:01+00:00,2026-04-07T06:57:01+00:00
