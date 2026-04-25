@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 640" font-family="-apple-system,Segoe UI,sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0f172a"/>
+      <stop offset="1" stop-color="#0b1224"/>
+    </linearGradient>
+  </defs>
+  <rect width="1100" height="640" fill="url(#bg)"/>
+
+  <!-- header bar -->
+  <rect x="0" y="0" width="1100" height="56" fill="#0f172a"/>
+  <line x1="0" y1="56" x2="1100" y2="56" stroke="#334155"/>
+  <text x="24" y="35" font-size="16" font-weight="700" fill="#e2e8f0">SecOps - Single Pane of Glass</text>
+  <text x="1076" y="35" font-size="12" fill="#94a3b8" text-anchor="end">Generated 2026-04-25 06:47 UTC</text>
+
+  <!-- KPI cards -->
+  <g font-size="12" fill="#94a3b8">
+    <rect x="20"  y="80" width="245" height="92" rx="10" fill="#1e293b"/>
+    <text x="36"  y="104" letter-spacing="0.7">FAILED LOGINS (24H)</text>
+    <text x="36"  y="156" font-size="36" font-weight="700" fill="#e2e8f0">130</text>
+
+    <rect x="280" y="80" width="245" height="92" rx="10" fill="#1e293b"/>
+    <text x="296" y="104" letter-spacing="0.7">OPEN INCIDENTS</text>
+    <text x="296" y="156" font-size="36" font-weight="700" fill="#fca5a5">5</text>
+
+    <rect x="540" y="80" width="245" height="92" rx="10" fill="#1e293b"/>
+    <text x="556" y="104" letter-spacing="0.7">CLOSED INCIDENTS</text>
+    <text x="556" y="156" font-size="36" font-weight="700" fill="#86efac">25</text>
+
+    <rect x="800" y="80" width="280" height="92" rx="10" fill="#1e293b"/>
+    <text x="816" y="104" letter-spacing="0.7">MTTR (HOURS)</text>
+    <text x="816" y="156" font-size="36" font-weight="700" fill="#e2e8f0">37.9</text>
+  </g>
+
+  <!-- Vulns by severity bar chart -->
+  <rect x="20" y="190" width="525" height="200" rx="10" fill="#1e293b"/>
+  <text x="36" y="214" font-size="12" fill="#94a3b8" letter-spacing="0.7">OPEN VULNERABILITIES BY SEVERITY</text>
+  <g>
+    <!-- bars -->
+    <rect x="60"  y="350" width="80" height="20"  fill="#ef4444"/>
+    <rect x="170" y="290" width="80" height="80"  fill="#f97316"/>
+    <rect x="280" y="270" width="80" height="100" fill="#eab308"/>
+    <rect x="390" y="240" width="80" height="130" fill="#22c55e"/>
+    <!-- labels -->
+    <g font-size="11" fill="#94a3b8" text-anchor="middle">
+      <text x="100" y="384">Critical</text>
+      <text x="210" y="384">High</text>
+      <text x="320" y="384">Medium</text>
+      <text x="430" y="384">Low</text>
+    </g>
+    <g font-size="12" font-weight="600" fill="#e2e8f0" text-anchor="middle">
+      <text x="100" y="343">0</text>
+      <text x="210" y="283">15</text>
+      <text x="320" y="263">28</text>
+      <text x="430" y="233">82</text>
+    </g>
+  </g>
+
+  <!-- Top source IPs (horizontal bars) -->
+  <rect x="560" y="190" width="520" height="200" rx="10" fill="#1e293b"/>
+  <text x="576" y="214" font-size="12" fill="#94a3b8" letter-spacing="0.7">TOP SOURCE IPs (24H)</text>
+  <g font-size="12" fill="#cbd5e1">
+    <text x="576" y="248">203.0.113.45</text>  <rect x="700" y="237" width="280" height="14" fill="#38bdf8"/><text x="990" y="248">42</text>
+    <text x="576" y="278">198.51.100.7</text>  <rect x="700" y="267" width="180" height="14" fill="#38bdf8"/><text x="890" y="278">27</text>
+    <text x="576" y="308">185.220.101.42</text><rect x="700" y="297" width="120" height="14" fill="#38bdf8"/><text x="830" y="308">18</text>
+    <text x="576" y="338">45.83.64.1</text>    <rect x="700" y="327" width="80"  height="14" fill="#38bdf8"/><text x="790" y="338">12</text>
+    <text x="576" y="368">91.219.236.222</text><rect x="700" y="357" width="40"  height="14" fill="#38bdf8"/><text x="750" y="368">7</text>
+  </g>
+
+  <!-- Top users (horizontal bars) -->
+  <rect x="20" y="410" width="525" height="210" rx="10" fill="#1e293b"/>
+  <text x="36" y="434" font-size="12" fill="#94a3b8" letter-spacing="0.7">TOP TARGETED USERS (24H)</text>
+  <g font-size="12" fill="#cbd5e1">
+    <text x="36" y="468">root</text>      <rect x="120" y="457" width="320" height="14" fill="#a78bfa"/><text x="450" y="468">52</text>
+    <text x="36" y="498">admin</text>     <rect x="120" y="487" width="220" height="14" fill="#a78bfa"/><text x="350" y="498">36</text>
+    <text x="36" y="528">jsmith</text>    <rect x="120" y="517" width="160" height="14" fill="#a78bfa"/><text x="290" y="528">22</text>
+    <text x="36" y="558">svc_backup</text><rect x="120" y="547" width="90"  height="14" fill="#a78bfa"/><text x="220" y="558">14</text>
+    <text x="36" y="588">testuser</text>  <rect x="120" y="577" width="50"  height="14" fill="#a78bfa"/><text x="180" y="588">8</text>
+  </g>
+
+  <!-- Recent events feed -->
+  <rect x="560" y="410" width="520" height="210" rx="10" fill="#1e293b"/>
+  <text x="576" y="434" font-size="12" fill="#94a3b8" letter-spacing="0.7">RECENT EVENTS</text>
+  <g font-size="12" fill="#cbd5e1">
+    <text x="576" y="462"><tspan fill="#94a3b8">06:55</tspan> — Incident #INC-0029 (High): Brute-force on VPN</text>
+    <text x="576" y="490"><tspan fill="#94a3b8">06:54</tspan> — Failed login root from 203.0.113.45</text>
+    <text x="576" y="518"><tspan fill="#94a3b8">06:52</tspan> — Failed login admin from 198.51.100.7</text>
+    <text x="576" y="546"><tspan fill="#94a3b8">06:51</tspan> — Incident #INC-0028 (Medium): Suspicious PowerShell</text>
+    <text x="576" y="574"><tspan fill="#94a3b8">06:48</tspan> — Failed login svc_backup from 91.219.236.222</text>
+    <text x="576" y="602"><tspan fill="#94a3b8">06:47</tspan> — Failed login jsmith from 45.83.64.1</text>
+  </g>
+</svg>

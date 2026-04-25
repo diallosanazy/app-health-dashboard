@@ -1,5 +1,7 @@
 # SecOps Single Pane of Glass
 
+![Dashboard preview](docs/screenshot.svg)
+
 A lightweight security operations dashboard built with **Python (Flask) + Chart.js**.
 It pulls metrics from CSV/JSON log feeds and renders them on one page so a security
 team can see the state of the program at a glance — the "single pane of glass" view
@@ -7,6 +9,8 @@ incident response teams ask for.
 
 The same data is exported to a flat CSV so it can be consumed by **Power BI** if you
 want a heavier BI surface on top.
+
+[![CI](https://github.com/diallosanazy/secops-dashboard/actions/workflows/ci.yml/badge.svg)](https://github.com/diallosanazy/secops-dashboard/actions/workflows/ci.yml)
 
 ## What it shows
 
