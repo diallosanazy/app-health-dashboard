@@ -1,0 +1,126 @@
+id,component,severity,title,status,first_seen
+BUG-0001,auth,High,Stale cache after deploy,open,2026-04-14T15:33:28+00:00
+BUG-0002,auth,High,Slow query on /api/search,open,2026-04-21T00:32:28+00:00
+BUG-0003,billing,High,Layout overflow on mobile,open,2026-04-04T12:29:28+00:00
+BUG-0004,api,High,Slow query on /api/search,open,2026-04-04T23:50:28+00:00
+BUG-0005,auth,High,Missing aria-label on form input,open,2026-04-15T14:01:28+00:00
+BUG-0006,api,High,Layout overflow on mobile,open,2026-04-17T03:40:28+00:00
+BUG-0007,billing,High,Missing aria-label on form input,open,2026-04-13T06:18:28+00:00
+BUG-0008,web,High,Missing aria-label on form input,open,2026-04-09T23:04:28+00:00
+BUG-0009,notifications,High,Crash on logout while uploading,open,2026-04-07T18:03:28+00:00
+BUG-0010,notifications,High,Crash on logout while uploading,open,2026-04-10T20:54:28+00:00
+BUG-0011,web,High,Layout overflow on mobile,open,2026-04-14T01:18:28+00:00
+BUG-0012,api,High,Crash on logout while uploading,open,2026-04-13T20:39:28+00:00
+BUG-0013,web,High,Layout overflow on mobile,open,2026-03-29T19:00:28+00:00
+BUG-0014,billing,High,Missing aria-label on form input,open,2026-04-11T15:59:28+00:00
+BUG-0015,billing,High,Crash on logout while uploading,open,2026-04-02T16:00:28+00:00
+BUG-0016,web,Medium,Stale cache after deploy,open,2026-03-30T16:49:28+00:00
+BUG-0017,api,Medium,Missing aria-label on form input,open,2026-04-23T22:08:28+00:00
+BUG-0018,notifications,Medium,Stale cache after deploy,open,2026-04-25T20:46:28+00:00
+BUG-0019,search,Medium,Crash on logout while uploading,open,2026-04-16T23:24:28+00:00
+BUG-0020,auth,Medium,Stale cache after deploy,open,2026-04-22T18:11:28+00:00
+BUG-0021,notifications,Medium,Missing aria-label on form input,open,2026-03-28T13:57:28+00:00
+BUG-0022,auth,Medium,Date picker off-by-one in EST,open,2026-04-20T06:29:28+00:00
+BUG-0023,notifications,Medium,Missing aria-label on form input,open,2026-04-02T20:42:28+00:00
+BUG-0024,auth,Medium,Date picker off-by-one in EST,open,2026-04-07T08:32:28+00:00
+BUG-0025,auth,Medium,Stale cache after deploy,open,2026-04-12T11:40:28+00:00
+BUG-0026,search,Medium,Slow query on /api/search,open,2026-04-17T05:04:28+00:00
+BUG-0027,billing,Medium,Date picker off-by-one in EST,open,2026-04-08T16:29:28+00:00
+BUG-0028,notifications,Medium,Date picker off-by-one in EST,open,2026-04-18T00:31:28+00:00
+BUG-0029,search,Medium,Crash on logout while uploading,open,2026-04-12T05:53:28+00:00
+BUG-0030,billing,Medium,Crash on logout while uploading,open,2026-04-25T22:10:28+00:00
+BUG-0031,auth,Medium,Missing aria-label on form input,open,2026-04-16T09:02:28+00:00
+BUG-0032,billing,Medium,Crash on logout while uploading,open,2026-03-29T07:58:28+00:00
+BUG-0033,notifications,Medium,Missing aria-label on form input,open,2026-04-04T18:43:28+00:00
+BUG-0034,billing,Medium,Stale cache after deploy,open,2026-04-16T05:11:28+00:00
+BUG-0035,search,Medium,Stale cache after deploy,open,2026-04-18T05:16:28+00:00
+BUG-0036,notifications,Medium,Layout overflow on mobile,open,2026-04-13T00:38:28+00:00
+BUG-0037,search,Medium,Date picker off-by-one in EST,open,2026-03-28T03:16:28+00:00
+BUG-0038,search,Medium,Missing aria-label on form input,open,2026-04-21T16:36:28+00:00
+BUG-0039,api,Medium,Date picker off-by-one in EST,open,2026-04-11T19:33:28+00:00
+BUG-0040,api,Medium,Slow query on /api/search,open,2026-04-19T05:40:28+00:00
+BUG-0041,web,Medium,Layout overflow on mobile,open,2026-04-14T19:10:28+00:00
+BUG-0042,billing,Medium,Crash on logout while uploading,open,2026-04-22T15:04:28+00:00
+BUG-0043,billing,Medium,Stale cache after deploy,open,2026-03-28T06:44:28+00:00
+BUG-0044,search,Low,Slow query on /api/search,open,2026-04-08T11:12:28+00:00
+BUG-0045,billing,Low,Stale cache after deploy,open,2026-04-14T20:07:28+00:00
+BUG-0046,api,Low,Date picker off-by-one in EST,open,2026-04-25T16:33:28+00:00
+BUG-0047,web,Low,Stale cache after deploy,open,2026-04-15T23:35:28+00:00
+BUG-0048,api,Low,Date picker off-by-one in EST,open,2026-04-02T08:52:28+00:00
+BUG-0049,billing,Low,Layout overflow on mobile,open,2026-03-31T13:46:28+00:00
+BUG-0050,api,Low,Layout overflow on mobile,open,2026-04-05T04:02:28+00:00
+BUG-0051,api,Low,Stale cache after deploy,open,2026-04-01T18:28:28+00:00
+BUG-0052,search,Low,Crash on logout while uploading,open,2026-04-11T12:02:28+00:00
+BUG-0053,billing,Low,Crash on logout while uploading,open,2026-04-02T23:15:28+00:00
+BUG-0054,billing,Low,Crash on logout while uploading,open,2026-04-05T15:33:28+00:00
+BUG-0055,api,Low,Date picker off-by-one in EST,open,2026-04-04T08:08:28+00:00
+BUG-0056,billing,Low,Missing aria-label on form input,open,2026-04-14T16:33:28+00:00
+BUG-0057,notifications,Low,Missing aria-label on form input,open,2026-04-02T05:13:28+00:00
+BUG-0058,billing,Low,Date picker off-by-one in EST,open,2026-04-15T01:17:28+00:00
+BUG-0059,auth,Low,Stale cache after deploy,open,2026-04-22T09:59:28+00:00
+BUG-0060,notifications,Low,Missing aria-label on form input,open,2026-04-15T06:29:28+00:00
+BUG-0061,auth,Low,Missing aria-label on form input,open,2026-04-11T09:24:28+00:00
+BUG-0062,search,Low,Layout overflow on mobile,open,2026-04-19T15:28:28+00:00
+BUG-0063,api,Low,Slow query on /api/search,open,2026-04-08T12:14:28+00:00
+BUG-0064,notifications,Low,Slow query on /api/search,open,2026-04-16T04:55:28+00:00
+BUG-0065,web,Low,Stale cache after deploy,open,2026-04-07T09:24:28+00:00
+BUG-0066,auth,Low,Crash on logout while uploading,open,2026-04-04T17:42:28+00:00
+BUG-0067,billing,Low,Layout overflow on mobile,open,2026-04-16T12:41:28+00:00
+BUG-0068,billing,Low,Stale cache after deploy,open,2026-03-30T08:38:28+00:00
+BUG-0069,notifications,Low,Layout overflow on mobile,open,2026-03-30T17:48:28+00:00
+BUG-0070,billing,Low,Stale cache after deploy,open,2026-04-25T16:10:28+00:00
+BUG-0071,auth,Low,Missing aria-label on form input,open,2026-04-08T04:38:28+00:00
+BUG-0072,billing,Low,Crash on logout while uploading,open,2026-04-01T02:05:28+00:00
+BUG-0073,search,Low,Slow query on /api/search,open,2026-04-03T17:20:28+00:00
+BUG-0074,api,Low,Missing aria-label on form input,open,2026-04-06T02:34:28+00:00
+BUG-0075,billing,Low,Layout overflow on mobile,open,2026-04-08T05:52:28+00:00
+BUG-0076,auth,Low,Date picker off-by-one in EST,open,2026-04-07T12:59:28+00:00
+BUG-0077,notifications,Low,Slow query on /api/search,open,2026-04-04T16:06:28+00:00
+BUG-0078,api,Low,Crash on logout while uploading,open,2026-04-01T15:12:28+00:00
+BUG-0079,web,Low,Stale cache after deploy,open,2026-03-30T00:06:28+00:00
+BUG-0080,search,Low,Date picker off-by-one in EST,open,2026-04-24T17:00:28+00:00
+BUG-0081,web,Low,Date picker off-by-one in EST,open,2026-04-06T10:27:28+00:00
+BUG-0082,api,Low,Stale cache after deploy,open,2026-04-17T16:07:28+00:00
+BUG-0083,web,Low,Missing aria-label on form input,open,2026-04-08T16:32:28+00:00
+BUG-0084,auth,Low,Slow query on /api/search,open,2026-04-05T05:57:28+00:00
+BUG-0085,auth,Low,Missing aria-label on form input,open,2026-04-08T16:30:28+00:00
+BUG-0086,auth,Low,Stale cache after deploy,open,2026-04-14T11:04:28+00:00
+BUG-0087,web,Low,Stale cache after deploy,open,2026-04-25T01:26:28+00:00
+BUG-0088,notifications,Low,Crash on logout while uploading,open,2026-04-23T13:43:28+00:00
+BUG-0089,auth,Low,Slow query on /api/search,open,2026-03-27T08:29:28+00:00
+BUG-0090,web,Low,Date picker off-by-one in EST,open,2026-04-24T02:38:28+00:00
+BUG-0091,web,Low,Slow query on /api/search,open,2026-04-16T20:51:28+00:00
+BUG-0092,web,Low,Crash on logout while uploading,open,2026-04-19T00:10:28+00:00
+BUG-0093,api,Low,Slow query on /api/search,open,2026-04-04T09:21:28+00:00
+BUG-0094,notifications,Low,Layout overflow on mobile,open,2026-03-31T06:36:28+00:00
+BUG-0095,api,Low,Stale cache after deploy,open,2026-04-14T06:43:28+00:00
+BUG-0096,auth,Low,Slow query on /api/search,open,2026-03-29T08:49:28+00:00
+BUG-0097,search,Low,Date picker off-by-one in EST,open,2026-04-20T17:30:28+00:00
+BUG-0098,api,Low,Missing aria-label on form input,open,2026-04-21T00:32:28+00:00
+BUG-0099,search,Low,Layout overflow on mobile,open,2026-04-11T17:52:28+00:00
+BUG-0100,search,Low,Date picker off-by-one in EST,open,2026-04-08T20:40:28+00:00
+BUG-0101,billing,Low,Date picker off-by-one in EST,open,2026-04-16T21:59:28+00:00
+BUG-0102,web,Low,Crash on logout while uploading,open,2026-03-28T09:30:28+00:00
+BUG-0103,api,Low,Layout overflow on mobile,open,2026-04-12T05:12:28+00:00
+BUG-0104,notifications,Low,Crash on logout while uploading,open,2026-04-20T10:23:28+00:00
+BUG-0105,search,Low,Layout overflow on mobile,open,2026-04-10T03:22:28+00:00
+BUG-0106,search,Low,Stale cache after deploy,open,2026-04-09T01:51:28+00:00
+BUG-0107,web,Low,Crash on logout while uploading,open,2026-03-27T11:19:28+00:00
+BUG-0108,auth,Low,Layout overflow on mobile,open,2026-04-06T19:48:28+00:00
+BUG-0109,billing,Low,Layout overflow on mobile,open,2026-04-06T05:05:28+00:00
+BUG-0110,auth,Low,Date picker off-by-one in EST,open,2026-04-05T00:27:28+00:00
+BUG-0111,notifications,Low,Slow query on /api/search,open,2026-04-06T02:56:28+00:00
+BUG-0112,api,Low,Date picker off-by-one in EST,open,2026-04-02T04:43:28+00:00
+BUG-0113,notifications,Low,Missing aria-label on form input,open,2026-03-28T21:52:28+00:00
+BUG-0114,search,Low,Stale cache after deploy,open,2026-04-04T18:51:28+00:00
+BUG-0115,billing,Low,Date picker off-by-one in EST,open,2026-03-29T23:28:28+00:00
+BUG-0116,auth,Low,Missing aria-label on form input,open,2026-04-14T18:28:28+00:00
+BUG-0117,web,Low,Missing aria-label on form input,open,2026-04-05T10:13:28+00:00
+BUG-0118,api,Low,Stale cache after deploy,open,2026-03-31T00:11:28+00:00
+BUG-0119,search,Low,Date picker off-by-one in EST,open,2026-04-08T16:39:28+00:00
+BUG-0120,auth,Low,Layout overflow on mobile,open,2026-04-03T10:42:28+00:00
+BUG-0121,auth,Low,Slow query on /api/search,open,2026-04-03T18:04:28+00:00
+BUG-0122,api,Low,Missing aria-label on form input,open,2026-04-14T04:25:28+00:00
+BUG-0123,auth,Low,Missing aria-label on form input,open,2026-03-29T19:27:28+00:00
+BUG-0124,notifications,Low,Missing aria-label on form input,open,2026-03-31T15:32:28+00:00
+BUG-0125,web,Low,Crash on logout while uploading,open,2026-04-17T05:55:28+00:00

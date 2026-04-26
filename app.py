@@ -1,11 +1,11 @@
-"""SecOps Single Pane of Glass — Flask app.
+"""App Health Dashboard — Flask app.
 
 Reads three CSV feeds from ./data and serves a one-page dashboard with the
-metrics a security operations team checks every morning:
+metrics a small dev team checks every morning:
 
-    * Failed logins (last 24h, top source IPs and users)
-    * Open vulnerabilities by severity
-    * Incidents: open vs closed, mean time to respond (MTTR)
+    * Errors (last 24h, top failing endpoints and affected users)
+    * Open bugs by severity
+    * Tickets: open vs closed, mean time to fix (MTTF)
 
 Also exports a flat metrics CSV for Power BI.
 """
@@ -36,18 +36,18 @@ def _read_csv(name: str) -> pd.DataFrame:
 
 def load_feeds() -> dict[str, pd.DataFrame]:
     """Load the three feeds the dashboard expects."""
-    logins = _read_csv("failed_logins.csv")
-    vulns = _read_csv("vulnerabilities.csv")
-    incidents = _read_csv("incidents.csv")
+    errors = _read_csv("errors.csv")
+    bugs = _read_csv("bugs.csv")
+    tickets = _read_csv("tickets.csv")
 
-    if not logins.empty:
-        logins["timestamp"] = pd.to_datetime(logins["timestamp"], utc=True)
-    if not incidents.empty:
-        incidents["opened_at"] = pd.to_datetime(incidents["opened_at"], utc=True)
-        incidents["closed_at"] = pd.to_datetime(
-            incidents["closed_at"], utc=True, errors="coerce"
+    if not errors.empty:
+        errors["timestamp"] = pd.to_datetime(errors["timestamp"], utc=True)
+    if not tickets.empty:
+        tickets["opened_at"] = pd.to_datetime(tickets["opened_at"], utc=True)
+        tickets["closed_at"] = pd.to_datetime(
+            tickets["closed_at"], utc=True, errors="coerce"
         )
-    return {"logins": logins, "vulns": vulns, "incidents": incidents}
+    return {"errors": errors, "bugs": bugs, "tickets": tickets}
 
 
 # ---------- metrics ----------
@@ -56,73 +56,73 @@ def compute_metrics(feeds: dict[str, pd.DataFrame]) -> dict:
     now = datetime.now(timezone.utc)
     cutoff = now - timedelta(hours=24)
 
-    logins = feeds["logins"]
-    vulns = feeds["vulns"]
-    incidents = feeds["incidents"]
+    errors = feeds["errors"]
+    bugs = feeds["bugs"]
+    tickets = feeds["tickets"]
 
-    # Failed logins last 24h
-    last24 = logins[logins["timestamp"] >= cutoff] if not logins.empty else logins
-    failed_logins_24h = int(len(last24))
-    top_login_ips = (
-        last24.groupby("source_ip").size().sort_values(ascending=False).head(5)
+    # Errors last 24h
+    last24 = errors[errors["timestamp"] >= cutoff] if not errors.empty else errors
+    errors_24h = int(len(last24))
+    top_endpoints = (
+        last24.groupby("endpoint").size().sort_values(ascending=False).head(5)
         if not last24.empty
         else pd.Series(dtype=int)
     )
-    top_login_users = (
-        last24.groupby("username").size().sort_values(ascending=False).head(5)
+    top_users = (
+        last24.groupby("user_id").size().sort_values(ascending=False).head(5)
         if not last24.empty
         else pd.Series(dtype=int)
     )
 
-    # Vulnerabilities by severity
+    # Bugs by severity
     severities = ["Critical", "High", "Medium", "Low"]
-    if vulns.empty:
-        vuln_counts = {s: 0 for s in severities}
+    if bugs.empty:
+        bug_counts = {s: 0 for s in severities}
     else:
-        open_v = vulns[vulns["status"].str.lower() == "open"]
-        vuln_counts = {s: int((open_v["severity"] == s).sum()) for s in severities}
+        open_b = bugs[bugs["status"].str.lower() == "open"]
+        bug_counts = {s: int((open_b["severity"] == s).sum()) for s in severities}
 
-    # Incidents
-    if incidents.empty:
-        open_inc = closed_inc = 0
-        mttr_hours = 0.0
+    # Tickets
+    if tickets.empty:
+        open_t = closed_t = 0
+        mttf_hours = 0.0
     else:
-        open_inc = int((incidents["closed_at"].isna()).sum())
-        closed = incidents.dropna(subset=["closed_at"])
-        closed_inc = int(len(closed))
+        open_t = int((tickets["closed_at"].isna()).sum())
+        closed = tickets.dropna(subset=["closed_at"])
+        closed_t = int(len(closed))
         if not closed.empty:
             deltas = (closed["closed_at"] - closed["opened_at"]).dt.total_seconds() / 3600
-            mttr_hours = round(float(deltas.mean()), 1)
+            mttf_hours = round(float(deltas.mean()), 1)
         else:
-            mttr_hours = 0.0
+            mttf_hours = 0.0
 
-    # Recent events feed (last 20 across logins+incidents)
+    # Recent events feed (last 20 across errors+tickets)
     feed: list[dict] = []
-    if not logins.empty:
-        for _, r in logins.sort_values("timestamp", ascending=False).head(20).iterrows():
+    if not errors.empty:
+        for _, r in errors.sort_values("timestamp", ascending=False).head(20).iterrows():
             feed.append({
-                "kind": "login",
+                "kind": "error",
                 "ts": r["timestamp"].isoformat(),
-                "text": f"Failed login {r['username']} from {r['source_ip']}",
+                "text": f"{r['error_type']} on {r['endpoint']} (user {r['user_id']})",
             })
-    if not incidents.empty:
-        for _, r in incidents.sort_values("opened_at", ascending=False).head(20).iterrows():
+    if not tickets.empty:
+        for _, r in tickets.sort_values("opened_at", ascending=False).head(20).iterrows():
             feed.append({
-                "kind": "incident",
+                "kind": "ticket",
                 "ts": r["opened_at"].isoformat(),
-                "text": f"Incident #{r['id']} ({r['severity']}): {r['title']}",
+                "text": f"Ticket #{r['id']} ({r['severity']}): {r['title']}",
             })
     feed.sort(key=lambda x: x["ts"], reverse=True)
     feed = feed[:20]
 
     metrics = {
-        "failed_logins_24h": failed_logins_24h,
-        "top_login_ips": top_login_ips.to_dict(),
-        "top_login_users": top_login_users.to_dict(),
-        "vuln_counts": vuln_counts,
-        "open_incidents": open_inc,
-        "closed_incidents": closed_inc,
-        "mttr_hours": mttr_hours,
+        "errors_24h": errors_24h,
+        "top_endpoints": top_endpoints.to_dict(),
+        "top_users": top_users.to_dict(),
+        "bug_counts": bug_counts,
+        "open_tickets": open_t,
+        "closed_tickets": closed_t,
+        "mttf_hours": mttf_hours,
         "feed": feed,
         "generated_at": now.isoformat(),
     }
@@ -132,13 +132,13 @@ def compute_metrics(feeds: dict[str, pd.DataFrame]) -> dict:
 def export_for_powerbi(m: dict) -> None:
     """Write a flat CSV that Power BI can pick up."""
     rows = [
-        {"metric": "failed_logins_24h", "value": m["failed_logins_24h"]},
-        {"metric": "open_incidents", "value": m["open_incidents"]},
-        {"metric": "closed_incidents", "value": m["closed_incidents"]},
-        {"metric": "mttr_hours", "value": m["mttr_hours"]},
+        {"metric": "errors_24h", "value": m["errors_24h"]},
+        {"metric": "open_tickets", "value": m["open_tickets"]},
+        {"metric": "closed_tickets", "value": m["closed_tickets"]},
+        {"metric": "mttf_hours", "value": m["mttf_hours"]},
     ]
-    for sev, count in m["vuln_counts"].items():
-        rows.append({"metric": f"vuln_{sev.lower()}", "value": count})
+    for sev, count in m["bug_counts"].items():
+        rows.append({"metric": f"bug_{sev.lower()}", "value": count})
     DATA.mkdir(exist_ok=True)
     pd.DataFrame(rows).to_csv(EXPORT, index=False)
 
@@ -159,4 +159,4 @@ def api_metrics():
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", "5000")), debug=True)
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", "5001")), debug=True)

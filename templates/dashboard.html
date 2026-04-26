@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SecOps - Single Pane of Glass</title>
+<title>App Health Dashboard</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 <style>
   :root {
@@ -27,7 +27,7 @@
   th, td { padding: 6px 8px; border-bottom: 1px solid #334155; text-align: left; font-size: 13px; }
   th { color: var(--muted); font-weight: 500; }
   .feed li { list-style: none; padding: 8px 0; border-bottom: 1px solid #334155; font-size: 13px; }
-  .feed li.kind-incident { color: #fca5a5; }
+  .feed li.kind-ticket { color: #fca5a5; }
   .feed li .ts { color: var(--muted); font-size: 11px; }
   canvas { max-width: 100%; }
   @media (max-width: 900px) {
@@ -37,19 +37,19 @@
 </head>
 <body>
   <header>
-    <h1>SecOps - Single Pane of Glass</h1>
+    <h1>App Health Dashboard</h1>
     <span class="ts" id="generated">loading...</span>
   </header>
   <div class="grid">
-    <div class="card col-3"><h2>Failed Logins (24h)</h2><div class="kpi" id="kpi-logins">-</div></div>
-    <div class="card col-3"><h2>Open Incidents</h2><div class="kpi" id="kpi-open-inc">-</div></div>
-    <div class="card col-3"><h2>Closed Incidents</h2><div class="kpi" id="kpi-closed-inc">-</div></div>
-    <div class="card col-3"><h2>MTTR (hours)</h2><div class="kpi" id="kpi-mttr">-</div></div>
+    <div class="card col-3"><h2>Errors (24h)</h2><div class="kpi" id="kpi-errors">-</div></div>
+    <div class="card col-3"><h2>Open Tickets</h2><div class="kpi" id="kpi-open-tickets">-</div></div>
+    <div class="card col-3"><h2>Closed Tickets</h2><div class="kpi" id="kpi-closed-tickets">-</div></div>
+    <div class="card col-3"><h2>MTTF (hours)</h2><div class="kpi" id="kpi-mttf">-</div></div>
 
-    <div class="card col-6"><h2>Open Vulnerabilities by Severity</h2><canvas id="chart-vulns"></canvas></div>
-    <div class="card col-6"><h2>Top Source IPs (failed logins, 24h)</h2><canvas id="chart-ips"></canvas></div>
+    <div class="card col-6"><h2>Open Bugs by Severity</h2><canvas id="chart-bugs"></canvas></div>
+    <div class="card col-6"><h2>Top Failing Endpoints (24h)</h2><canvas id="chart-endpoints"></canvas></div>
 
-    <div class="card col-6"><h2>Top Targeted Users (24h)</h2><canvas id="chart-users"></canvas></div>
+    <div class="card col-6"><h2>Top Affected Users (24h)</h2><canvas id="chart-users"></canvas></div>
     <div class="card col-6"><h2>Recent Events</h2><ul class="feed" id="feed"></ul></div>
   </div>
 
@@ -60,13 +60,13 @@ async function load() {
 
   document.getElementById("generated").textContent =
     "Generated " + new Date(m.generated_at).toLocaleString();
-  document.getElementById("kpi-logins").textContent = m.failed_logins_24h;
-  document.getElementById("kpi-open-inc").textContent = m.open_incidents;
-  document.getElementById("kpi-closed-inc").textContent = m.closed_incidents;
-  document.getElementById("kpi-mttr").textContent = m.mttr_hours;
+  document.getElementById("kpi-errors").textContent = m.errors_24h;
+  document.getElementById("kpi-open-tickets").textContent = m.open_tickets;
+  document.getElementById("kpi-closed-tickets").textContent = m.closed_tickets;
+  document.getElementById("kpi-mttf").textContent = m.mttf_hours;
 
-  const sev = m.vuln_counts;
-  new Chart(document.getElementById("chart-vulns"), {
+  const sev = m.bug_counts;
+  new Chart(document.getElementById("chart-bugs"), {
     type: "bar",
     data: {
       labels: ["Critical", "High", "Medium", "Low"],
@@ -85,8 +85,8 @@ async function load() {
       options: { indexAxis: "y", plugins: { legend: { display: false } } },
     });
   }
-  bar("chart-ips", m.top_login_ips, "#38bdf8");
-  bar("chart-users", m.top_login_users, "#a78bfa");
+  bar("chart-endpoints", m.top_endpoints, "#38bdf8");
+  bar("chart-users", m.top_users, "#a78bfa");
 
   const feed = document.getElementById("feed");
   feed.innerHTML = "";
